@@ -22,8 +22,7 @@ import java.util.List;
 public class ContinentResource {
     @Inject
     ContinentRepository continentRepository;
-@Context
-    UriInfo uriInfo;
+    @Context
     @GET
     public Response getAll(){
         List<ContinentEntity> continents = continentRepository.listAll();
@@ -47,7 +46,6 @@ public class ContinentResource {
 
         if (continent == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
-
 
         continentRepository.persist(continent);
         return Response.ok(continent).status(Response.Status.CREATED).build();
@@ -74,7 +72,5 @@ public class ContinentResource {
 
 
     }
-
-
 
 }
