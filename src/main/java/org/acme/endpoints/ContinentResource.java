@@ -57,7 +57,6 @@ public class ContinentResource {
     @Path("{idContinent}")
     public Response update(@PathParam("idContinent") Integer idContinent, ContinentEntity continent){
         ContinentEntity continentEntity = continentRepository.findById(idContinent);
-
        continentEntity.setNomContinentFr(continent.getNomContinentFr());
         continentEntity.setNomContinentAng(continent.getNomContinentAng());
 
