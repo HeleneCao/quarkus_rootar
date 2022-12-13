@@ -14,6 +14,8 @@ public class ContinentEntity {
     private Integer idContinent;
 
     @Column (name="NOM_CONTINENT_FR")
-    private String nomContinentfr;
+    private String nomContinentFr;
+    @Column (name="NOM_CONTINENT_ANG")
+    private String nomContinentAng;
 
 }

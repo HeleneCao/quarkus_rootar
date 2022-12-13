@@ -9,4 +9,5 @@ import javax.inject.Named;
 @ApplicationScoped
 @Named("ContinentRepository")
 public class ContinentRepository implements PanacheRepositoryBase<ContinentEntity, Integer> {
+
 }
