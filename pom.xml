@@ -78,6 +78,13 @@
       <version>1.18.22</version>
       <scope>compile</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-mailer -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-mailer</artifactId>
+      <version>2.15.0.Final</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>

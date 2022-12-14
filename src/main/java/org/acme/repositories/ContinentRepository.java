@@ -1,6 +1,7 @@
 package org.acme.repositories;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import org.acme.dto.ContinentDto;
 import org.acme.entities.ContinentEntity;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -1,5 +1,6 @@
 package org.acme.endpoints;
 
+import org.acme.dto.ContinentDto;
 import org.acme.entities.ContinentEntity;
 import org.acme.repositories.ContinentRepository;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -25,22 +26,23 @@ public class ContinentResource {
     @Context
     @GET
     public Response getAll(){
-        List<ContinentEntity> continents = continentRepository.listAll();
+        List<ContinentDto> continents = ContinentDto.toContinentDtoList(continentRepository.listAll());
+
         return Response.ok(continents).build();
     }
-    @GET
+   /* @GET
     @Path("{idContinent}")
     public Response getById(@PathParam("idContinent") Integer idContinent){
         ContinentEntity continent = continentRepository.findById(idContinent);
         return Response.ok(continent).build();
-    }
+    }*/
     @GET
     @Path("/count")
     @Transactional
     public long count() {
         return continentRepository.count();
     }
-    @POST
+    /*@POST
     @Transactional
     public Response insert(ContinentEntity continent) {
 
@@ -56,7 +58,7 @@ public class ContinentResource {
     public Response update(@PathParam("idContinent") Integer idContinent, ContinentEntity continent){
         ContinentEntity continentEntity = continentRepository.findById(idContinent);
        continentEntity.setNomContinentFr(continent.getNomContinentFr());
-        continentEntity.setNomContinentAng(continent.getNomContinentAng());
+       continentEntity.setNomContinentAng(continent.getNomContinentAng());
 
 
 
@@ -71,6 +73,6 @@ public class ContinentResource {
         return Response.ok(idContinent).build();
 
 
-    }
+    }*/
 
 }
