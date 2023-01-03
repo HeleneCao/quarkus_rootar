@@ -1,8 +1,13 @@
 package org.acme.endpoints;
 
 import org.acme.dto.ContinentDto;
+import org.acme.dto.PaysDto;
 import org.acme.entities.ContinentEntity;
+import org.acme.entities.PaysEntity;
 import org.acme.repositories.ContinentRepository;
+import org.acme.repositories.PaysRepository;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
@@ -14,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/continent")
@@ -23,13 +29,28 @@ import java.util.List;
 public class ContinentResource {
     @Inject
     ContinentRepository continentRepository;
-    @Context
-    @GET
-    public Response getAll(){
-        List<ContinentDto> continents = ContinentDto.toContinentDtoList(continentRepository.listAll());
+    PaysRepository paysRepository;
 
-        return Response.ok(continents).build();
+
+    @GET
+    @Operation(summary = "Continent", description = "get all continent")
+    @APIResponse(responseCode = "200", description = "Ok, continent found")
+    @APIResponse(responseCode = "204", description = "Continent not found")
+    public Response getAll(@Context UriInfo uriInfo){
+        List<ContinentDto> continentsDto = new ArrayList<>();
+        for (ContinentEntity continent : continentRepository.listAll()){
+            ContinentDto continentDto = new ContinentDto(continent);
+            String uriBase = uriInfo.getRequestUriBuilder().build().toString();
+            continentDto.addLinks("all", uriBase);
+            continentDto.addLinks("self", uriBase +"/"+ continent.getIdContinent());
+            continentsDto.add(continentDto);
+
+         
+        }
+        return Response.ok(continentsDto).build();
+
     }
+
    /* @GET
     @Path("{idContinent}")
     public Response getById(@PathParam("idContinent") Integer idContinent){

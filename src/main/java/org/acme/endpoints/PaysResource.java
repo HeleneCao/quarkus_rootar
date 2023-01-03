@@ -1,8 +1,12 @@
 package org.acme.endpoints;
 
+import org.acme.dto.ContinentDto;
+import org.acme.dto.PaysDto;
 import org.acme.entities.ContinentEntity;
 import org.acme.entities.PaysEntity;
 import org.acme.repositories.PaysRepository;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
@@ -11,6 +15,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/pays")
@@ -21,12 +27,24 @@ public class PaysResource {
 
     @Inject
     PaysRepository paysRepository;
-    @Context
+
+
     @GET
-    public Response getAll(){
-        List<PaysEntity> pays = paysRepository.listAll();
-        return Response.ok(pays).build();
+    @Operation(summary = "Pays", description = "get all pays")
+    @APIResponse(responseCode = "200", description = "Ok, pays found")
+    @APIResponse(responseCode = "204", description = "Pays not found")
+    public Response getAll(@Context UriInfo uriInfo){
+        List<PaysDto> paysDtos = new ArrayList<>();
+        for (PaysEntity pays : paysRepository.listAll()){
+          PaysDto paysDto = new PaysDto(pays);
+          String uriBase = uriInfo.getRequestUriBuilder().build().toString();
+          paysDto.addLinks("all", uriBase);
+          paysDto.addLinks("self", uriBase +"/"+ pays.getIdPays());
+          paysDtos.add(paysDto);
+        }
+        return Response.ok(paysDtos).build();
     }
+
     @GET
     @Path("{idPays}")
     public Response getById(@PathParam("idPays") Integer idPays){

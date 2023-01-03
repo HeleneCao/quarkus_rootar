@@ -1,16 +1,19 @@
 package org.acme.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.acme.entities.ContinentEntity;
 import org.acme.entities.PaysEntity;
+import org.acme.hateaos.HateOas;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class ContinentDto {
+@JsonPropertyOrder({"id","nom"})
+public class ContinentDto extends HateOas {
 
     private int id;
     private String nom;
@@ -37,9 +40,9 @@ public class ContinentDto {
         }
         return continentDtoList;
     }
-    @Getter
-    @Setter
-    class Pays{
+    @Data
+    @JsonPropertyOrder({"id","nom"})
+    class Pays extends HateOas{
         private int id;
         private String nom;
 
