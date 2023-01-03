@@ -19,6 +19,9 @@ import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.acme.dto.ContinentDto.continentDtoById;
+import static org.acme.dto.PaysDto.paysDtoById;
+
 @Path("/pays")
 @Tag(name="Pays")
 @Produces(MediaType.APPLICATION_JSON)
@@ -48,7 +51,7 @@ public class PaysResource {
     @GET
     @Path("{idPays}")
     public Response getById(@PathParam("idPays") Integer idPays){
-        PaysEntity pays = paysRepository.findById(idPays);
+        PaysDto pays = paysDtoById(paysRepository.findById(idPays));
         return Response.ok(pays).build();
     }
     @GET

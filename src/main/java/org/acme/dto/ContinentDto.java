@@ -40,6 +40,13 @@ public class ContinentDto extends HateOas {
         }
         return continentDtoList;
     }
+
+    public static ContinentDto continentDtoById(ContinentEntity continentEntities){
+        ContinentDto continentDto = new ContinentDto(continentEntities);
+
+        return continentDto;
+    }
+
     @Data
     @JsonPropertyOrder({"id","nom"})
     class Pays extends HateOas{

@@ -22,6 +22,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.acme.dto.ContinentDto.continentDtoById;
+
 @Path("/continent")
 @Tag(name="Continent")
 @Produces(MediaType.APPLICATION_JSON)
@@ -51,19 +53,19 @@ public class ContinentResource {
 
     }
 
-   /* @GET
+    @GET
     @Path("{idContinent}")
     public Response getById(@PathParam("idContinent") Integer idContinent){
-        ContinentEntity continent = continentRepository.findById(idContinent);
+        ContinentDto continent = continentDtoById(continentRepository.findById(idContinent));
         return Response.ok(continent).build();
-    }*/
+    }
     @GET
     @Path("/count")
     @Transactional
     public long count() {
         return continentRepository.count();
     }
-    /*@POST
+    @POST
     @Transactional
     public Response insert(ContinentEntity continent) {
 
@@ -73,7 +75,7 @@ public class ContinentResource {
         continentRepository.persist(continent);
         return Response.ok(continent).status(Response.Status.CREATED).build();
     }
-    @PUT
+   /* @PUT
     @Transactional
     @Path("{idContinent}")
     public Response update(@PathParam("idContinent") Integer idContinent, ContinentEntity continent){

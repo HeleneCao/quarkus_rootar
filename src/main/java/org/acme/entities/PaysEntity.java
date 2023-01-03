@@ -45,16 +45,25 @@ public class PaysEntity {
     @Column(name = "INDICATIF_TELEPHONIQUE")
     private String indicatifTelephonique;
 
-    @Basic
+    /*@Basic
     @Column(name = "ID_MONNAIE")
-    private int idMonnaie;
+    private int idMonnaie;*/
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name ="ID_MONNAIE")
+    private List<MonnaieEntity> monnaie;
+
     @Basic
     @Column(name = "ID_VISAS")
     private Integer idVisas;
-    @Basic
+    /*@Basic
     @Column(name = "ID_VILLE")
-    private int idVille;
+    private int idVille;*/
 
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "ID_VILLE")
+    private VilleEntity ville;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "ID_CONTINENT")
