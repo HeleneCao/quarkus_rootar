@@ -2,6 +2,7 @@ package org.acme.endpoints;
 
 import org.acme.dto.ContinentDto;
 import org.acme.dto.LanguesDto;
+import org.acme.dto.VisasDto;
 import org.acme.entities.ContinentEntity;
 import org.acme.entities.LanguesEntity;
 import org.acme.repositories.LanguesRepositoiry;
@@ -10,16 +11,16 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.acme.dto.LanguesDto.languesDtoById;
+import static org.acme.dto.VisasDto.visasDtoById;
 
 @Path("/langues")
 @Tag(name="langues")
@@ -47,6 +48,13 @@ public class LanguesResource {
         }
         return Response.ok(languessDto).build();
 
+    }
+
+    @GET
+    @Path("{idLangues}")
+    public Response getById(@PathParam("idLangues") Integer idLangues){
+        LanguesDto langues = languesDtoById(languesRepositoiry.findById(idLangues));
+        return Response.ok(langues).build();
     }
 
 }

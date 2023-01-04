@@ -3,6 +3,7 @@ package org.acme.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
+import org.acme.entities.PaysEntity;
 import org.acme.entities.TypeVisaEntity;
 import org.acme.entities.VisasEntity;
 import org.acme.hateaos.HateOas;
@@ -23,6 +24,12 @@ public class VisasDto extends HateOas {
         delaiObtention = visasEntity.getDelaiObtention();
         prixVisas = visasEntity.getPrixVisas();
         typeVisa = new TypeVisa(visasEntity.getTypeVisa());
+    }
+
+    public static VisasDto visasDtoById(VisasEntity visasEntities){
+        VisasDto visasDto = new VisasDto(visasEntities);
+
+        return visasDto;
     }
 
     @Data
