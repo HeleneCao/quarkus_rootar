@@ -31,7 +31,7 @@ import static org.acme.dto.ContinentDto.continentDtoById;
 public class ContinentResource {
     @Inject
     ContinentRepository continentRepository;
-    PaysRepository paysRepository;
+
 
 
     @GET
