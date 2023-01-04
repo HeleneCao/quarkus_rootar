@@ -21,9 +21,10 @@ public class VisasEntity {
     @Basic
     @Column(name = "PRIX_VISAS")
     private double prixVisas;
-    @Basic
-    @Column(name = "ID_TYPE_VISA")
-    private int idTypeVisa;
 
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "ID_TYPE_VISA")
+    private TypeVisaEntity typeVisa;
 
 }
