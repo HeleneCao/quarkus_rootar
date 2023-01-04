@@ -2,10 +2,7 @@ package org.acme.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import org.acme.entities.ContinentEntity;
-import org.acme.entities.MonnaieEntity;
-import org.acme.entities.PaysEntity;
-import org.acme.entities.VilleEntity;
+import org.acme.entities.*;
 import org.acme.hateaos.HateOas;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +36,8 @@ public class PaysDto extends HateOas {
 
     private Ville ville;
 
+    private Visas visas;
+
 
 
     public PaysDto(PaysEntity paysEntity){
@@ -56,6 +55,7 @@ public class PaysDto extends HateOas {
         indicatifTelephonique = paysEntity.getIndicatifTelephonique();
         monnaie = fromMonnaieDtoList(paysEntity.getMonnaie());
         ville = new Ville(paysEntity.getVille());
+        visas = new Visas(paysEntity.getVisas());
     }
 
 
@@ -104,6 +104,8 @@ public class PaysDto extends HateOas {
         }
     }
 
+
+
     @Data
     class Ville{
         private int id;
@@ -113,6 +115,18 @@ public class PaysDto extends HateOas {
         public Ville(VilleEntity villeEntity) {
             id = villeEntity.getIdVille();
             nom = villeEntity.getNomVille();
+        }
+    }
+
+    @Data
+    class Visas{
+        private int id;
+
+
+
+        public Visas(VisasEntity visasEntity) {
+            id = visasEntity.getIdVisas();
+
         }
     }
 

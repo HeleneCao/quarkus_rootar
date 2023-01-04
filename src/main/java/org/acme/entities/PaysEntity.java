@@ -53,12 +53,11 @@ public class PaysEntity {
     @JoinColumn(name ="ID_MONNAIE")
     private List<MonnaieEntity> monnaie;
 
-    @Basic
-    @Column(name = "ID_VISAS")
-    private Integer idVisas;
-    /*@Basic
-    @Column(name = "ID_VILLE")
-    private int idVille;*/
+
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "ID_VISAS")
+    private VisasEntity visas;
 
 
     @ManyToOne (fetch = FetchType.LAZY)
