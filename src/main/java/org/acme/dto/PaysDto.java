@@ -78,7 +78,6 @@ public class PaysDto extends HateOas {
 
     public static PaysDto paysDtoById(PaysEntity paysEntities){
         PaysDto paysDto = new PaysDto(paysEntities);
-
         return paysDto;
     }
 
@@ -111,7 +110,6 @@ public class PaysDto extends HateOas {
         private int id;
         private String nom;
 
-
         public Ville(VilleEntity villeEntity) {
             id = villeEntity.getIdVille();
             nom = villeEntity.getNomVille();
@@ -122,11 +120,8 @@ public class PaysDto extends HateOas {
     class Visas{
         private int id;
 
-
-
         public Visas(VisasEntity visasEntity) {
             id = visasEntity.getIdVisas();
-
         }
     }
 
