@@ -16,5 +16,4 @@ public class TypeVisaEntity {
     @Column(name = "LIBELLE_TYPE_VISA")
     private String libelleTypeVisa;
 
-
 }
