@@ -1,9 +1,14 @@
 package org.acme.entities;
 
+import lombok.Data;
+import org.acme.dto.ObjetDto;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Data
 @Table(name = "OBJET", schema = "dbo", catalog = "ROOTAR")
 public class ObjetEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,44 +18,12 @@ public class ObjetEntity {
     @Basic
     @Column(name = "LIBELLE_OBJET")
     private String libelleObjet;
-    @Basic
+   /* @Basic
     @Column(name = "ID_CATEGORIES")
-    private int idCategories;
+    private int idCategories;*/
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "ID_CATEGORIES")
+    private CategoriesEntity categories;
 
-    public int getIdObjet() {
-        return idObjet;
-    }
 
-    public void setIdObjet(int idObjet) {
-        this.idObjet = idObjet;
-    }
-
-    public String getLibelleObjet() {
-        return libelleObjet;
-    }
-
-    public void setLibelleObjet(String libelleObjet) {
-        this.libelleObjet = libelleObjet;
-    }
-
-    public int getIdCategories() {
-        return idCategories;
-    }
-
-    public void setIdCategories(int idCategories) {
-        this.idCategories = idCategories;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ObjetEntity that = (ObjetEntity) o;
-        return idObjet == that.idObjet && idCategories == that.idCategories && Objects.equals(libelleObjet, that.libelleObjet);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idObjet, libelleObjet, idCategories);
-    }
 }

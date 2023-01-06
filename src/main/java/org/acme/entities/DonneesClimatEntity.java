@@ -1,9 +1,12 @@
 package org.acme.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Data
 @Table(name = "DONNEES_CLIMAT", schema = "dbo", catalog = "ROOTAR")
 @IdClass(DonneesClimatEntityPK.class)
 public class DonneesClimatEntity {
@@ -31,72 +34,4 @@ public class DonneesClimatEntity {
     @Column(name = "TAUX_HUMIDITE")
     private int tauxHumidite;
 
-    public int getIdRegion() {
-        return idRegion;
-    }
-
-    public void setIdRegion(int idRegion) {
-        this.idRegion = idRegion;
-    }
-
-    public int getMois() {
-        return mois;
-    }
-
-    public void setMois(int mois) {
-        this.mois = mois;
-    }
-
-    public String getLibelleMois() {
-        return libelleMois;
-    }
-
-    public void setLibelleMois(String libelleMois) {
-        this.libelleMois = libelleMois;
-    }
-
-    public double getTemperatureMin() {
-        return temperatureMin;
-    }
-
-    public void setTemperatureMin(double temperatureMin) {
-        this.temperatureMin = temperatureMin;
-    }
-
-    public double getTemperatureMax() {
-        return temperatureMax;
-    }
-
-    public void setTemperatureMax(double temperatureMax) {
-        this.temperatureMax = temperatureMax;
-    }
-
-    public Double getTemperatureMoy() {
-        return temperatureMoy;
-    }
-
-    public void setTemperatureMoy(Double temperatureMoy) {
-        this.temperatureMoy = temperatureMoy;
-    }
-
-    public int getTauxHumidite() {
-        return tauxHumidite;
-    }
-
-    public void setTauxHumidite(int tauxHumidite) {
-        this.tauxHumidite = tauxHumidite;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DonneesClimatEntity that = (DonneesClimatEntity) o;
-        return idRegion == that.idRegion && mois == that.mois && Double.compare(that.temperatureMin, temperatureMin) == 0 && Double.compare(that.temperatureMax, temperatureMax) == 0 && tauxHumidite == that.tauxHumidite && Objects.equals(libelleMois, that.libelleMois) && Objects.equals(temperatureMoy, that.temperatureMoy);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idRegion, mois, libelleMois, temperatureMin, temperatureMax, temperatureMoy, tauxHumidite);
-    }
 }

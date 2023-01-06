@@ -1,8 +1,6 @@
 package org.acme.endpoints;
 
-import org.acme.dto.CategoriesDto;
 import org.acme.dto.TypeClimatDto;
-import org.acme.entities.CategoriesEntity;
 import org.acme.entities.TypeClimatEntity;
 import org.acme.repositories.TypeClimatRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -18,14 +16,13 @@ import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.acme.dto.CategoriesDto.categoriesDtoById;
 import static org.acme.dto.TypeClimatDto.typeClimatDtoById;
 
 @Path("/type_climat")
 @Tag(name="Type_climat")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class TypeClimatRessource {
+public class TypeClimatResource {
 
     @Inject
     TypeClimatRepository typeClimatRepository;
