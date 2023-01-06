@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.*;
 import org.acme.hateaos.HateOas;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,9 +122,18 @@ public class PaysDto extends HateOas {
     @Data
     class Visas{
         private int id;
+        private int dureeValidite;
+        private int delaiObtention;
+        private double prixVisas;
+
+
 
         public Visas(VisasEntity visasEntity) {
             id = visasEntity.getIdVisas();
+            dureeValidite = visasEntity.getDureeValidite();
+            delaiObtention = visasEntity.getDelaiObtention();
+            prixVisas = visasEntity.getPrixVisas();
+
         }
     }
 
