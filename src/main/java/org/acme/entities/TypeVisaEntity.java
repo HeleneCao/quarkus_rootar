@@ -1,9 +1,8 @@
 package org.acme.entities;
 
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.Objects;
+
 
 @Data
 @Entity

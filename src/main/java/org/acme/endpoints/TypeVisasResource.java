@@ -1,14 +1,11 @@
 package org.acme.endpoints;
 
-import org.acme.dto.LanguesDto;
 import org.acme.dto.TypeVisasDto;
-import org.acme.entities.LanguesEntity;
 import org.acme.entities.TypeVisaEntity;
 import org.acme.repositories.TypeVisasRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -17,8 +14,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.acme.dto.LanguesDto.languesDtoById;
 import static org.acme.dto.TypeVisasDto.typeVisasDtoById;
 
 @Path("/typeVisas")
@@ -42,11 +37,8 @@ public class TypeVisasResource {
             typeVisasDto.addLinks("all", uriBase);
             typeVisasDto.addLinks("self", uriBase +"/"+ typeVisas.getIdTypeVisa());
             typeVisasDtos.add(typeVisasDto);
-
-
         }
         return Response.ok(typeVisasDtos).build();
-
     }
 
     @GET
