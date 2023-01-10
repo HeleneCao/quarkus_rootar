@@ -46,6 +46,8 @@ public class PaysDto extends HateOas {
     private List<Langues> langues;
     private List<Objet> objets;
 
+    private List<Themes> themes;
+
 
 
     public PaysDto(PaysEntity paysEntity){
@@ -67,6 +69,15 @@ public class PaysDto extends HateOas {
         sante = fromSanteDtoList(paysEntity.getSante());
         langues = fromLanguesDtoList(paysEntity.getLangues());
         objets = fromobjetsDtoList(paysEntity.getObjets());
+        themes = fromThemesDtoList(paysEntity.getThemes());
+    }
+
+    private List<Themes> fromThemesDtoList(List<ThemesEntity> themesEntities) {
+        List<Themes> themesList = new ArrayList();
+        for (ThemesEntity themesEntity : themesEntities){
+            themesList.add(new Themes(themesEntity));
+        }
+        return themesList;
     }
     private List<Objet> fromobjetsDtoList(List<ObjetEntity> objetEntities) {
         List<Objet> objetsList = new ArrayList();
@@ -195,6 +206,17 @@ public class PaysDto extends HateOas {
         public Objet(ObjetEntity objetEntity){
             idObjet = objetEntity.getIdObjet();
             libelleObjet = objetEntity.getLibelleObjet();
+        }
+    }
+
+    @Data
+    class Themes {
+        private int idThemes;
+
+        private String libelleTheme;
+        public Themes(ThemesEntity themesEntity){
+            idThemes = themesEntity.getIdTheme();
+            libelleTheme = themesEntity.getLibelleTheme();
         }
     }
 }

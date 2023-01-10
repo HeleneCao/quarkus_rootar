@@ -70,7 +70,7 @@ public class PaysEntity {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JoinTable(name = "Exiger",
+    @JoinTable(name = "exiger",
             joinColumns = @JoinColumn(name = "ID_PAYS"),
             inverseJoinColumns = @JoinColumn(name = "ID_SANTE")
     )
@@ -80,7 +80,7 @@ public class PaysEntity {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JoinTable(name = "Parler",
+    @JoinTable(name = "parler",
             joinColumns = @JoinColumn(name = "ID_PAYS"),
             inverseJoinColumns = @JoinColumn(name = "ID_LANGUES")
     )
@@ -94,4 +94,14 @@ public class PaysEntity {
             inverseJoinColumns = @JoinColumn(name = "ID_OBJET")
     )
     private List<ObjetEntity> objets;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "avoir",
+            joinColumns = @JoinColumn(name = "ID_PAYS"),
+            inverseJoinColumns = @JoinColumn(name = "ID_THEME")
+    )
+    private List<ThemesEntity> themes;
 }
