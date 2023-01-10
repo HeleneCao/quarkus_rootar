@@ -2,9 +2,7 @@ package org.acme.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import org.acme.entities.ContinentEntity;
 import org.acme.entities.LanguesEntity;
-import org.acme.entities.VisasEntity;
 import org.acme.hateaos.HateOas;
 
 @Data

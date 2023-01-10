@@ -1,9 +1,7 @@
 package org.acme.endpoints;
 
-import org.acme.dto.ContinentDto;
+
 import org.acme.dto.LanguesDto;
-import org.acme.dto.VisasDto;
-import org.acme.entities.ContinentEntity;
 import org.acme.entities.LanguesEntity;
 import org.acme.repositories.LanguesRepositoiry;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -43,11 +41,8 @@ public class LanguesResource {
             languesDto.addLinks("all", uriBase);
             languesDto.addLinks("self", uriBase +"/"+ langues.getIdLangues());
             languessDto.add(languesDto);
-
-
         }
         return Response.ok(languessDto).build();
-
     }
 
     @GET
@@ -56,5 +51,4 @@ public class LanguesResource {
         LanguesDto langues = languesDtoById(languesRepositoiry.findById(idLangues));
         return Response.ok(langues).build();
     }
-
 }

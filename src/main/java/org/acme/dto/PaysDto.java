@@ -134,9 +134,18 @@ public class PaysDto extends HateOas {
     @Data
     class Visas{
         private int id;
+        private int dureeValidite;
+        private int delaiObtention;
+        private double prixVisas;
+
+
 
         public Visas(VisasEntity visasEntity) {
             id = visasEntity.getIdVisas();
+            dureeValidite = visasEntity.getDureeValidite();
+            delaiObtention = visasEntity.getDelaiObtention();
+            prixVisas = visasEntity.getPrixVisas();
+
         }
     }
     @Data
