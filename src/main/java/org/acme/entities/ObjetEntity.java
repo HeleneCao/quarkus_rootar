@@ -26,4 +26,8 @@ public class ObjetEntity {
     private CategoriesEntity categories;
 
 
+    @ManyToMany(mappedBy = "objets")
+    private List<PaysEntity> pays;
+
+
 }

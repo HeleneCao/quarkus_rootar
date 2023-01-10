@@ -85,5 +85,13 @@ public class PaysEntity {
             inverseJoinColumns = @JoinColumn(name = "ID_LANGUES")
     )
     private List<LanguesEntity> langues;
-
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "emporter",
+            joinColumns = @JoinColumn(name = "ID_PAYS"),
+            inverseJoinColumns = @JoinColumn(name = "ID_OBJET")
+    )
+    private List<ObjetEntity> objets;
 }
