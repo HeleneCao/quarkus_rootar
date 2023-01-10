@@ -43,7 +43,6 @@ public class ContinentDto extends HateOas {
 
     public static ContinentDto continentDtoById(ContinentEntity continentEntities){
         ContinentDto continentDto = new ContinentDto(continentEntities);
-
         return continentDto;
     }
 

@@ -43,6 +43,8 @@ public class PaysDto extends HateOas {
 
     private List<Sante> sante;
 
+    private List<Langues> langues;
+
 
 
     public PaysDto(PaysEntity paysEntity){
@@ -62,9 +64,14 @@ public class PaysDto extends HateOas {
         ville = new Ville(paysEntity.getVille());
         visas = new Visas(paysEntity.getVisas());
         sante = fromSanteDtoList(paysEntity.getSante());
+        langues = fromLanguesDtoList(paysEntity.getLangues());
     }
-    public PaysDto(int id) {
-        this.id = id;
+    private List<Langues> fromLanguesDtoList(List<LanguesEntity> languesEntities) {
+        List<Langues> languesList = new ArrayList();
+        for (LanguesEntity languesEntity : languesEntities){
+            languesList.add(new Langues(languesEntity));
+        }
+        return languesList;
     }
     private List<Sante> fromSanteDtoList(List<SanteEntity> santeEntities) {
         List<Sante> santeList = new ArrayList();
@@ -157,6 +164,19 @@ public class PaysDto extends HateOas {
             idSante=santeEntity.getIdSante();
             libelleSante = santeEntity.getLibelleSante();
         }
+    }
+
+    @Data
+    class Langues{
+        private int idLangues;
+        private String libelleLangues;
+
+        public Langues(LanguesEntity languesEntity){
+            idLangues=languesEntity.getIdLangues();
+            libelleLangues=languesEntity.getLibelleLangues();
+        }
+
+
     }
 
 }

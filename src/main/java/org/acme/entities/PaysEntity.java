@@ -45,9 +45,7 @@ public class PaysEntity {
     @Column(name = "INDICATIF_TELEPHONIQUE")
     private String indicatifTelephonique;
 
-    /*@Basic
-    @Column(name = "ID_MONNAIE")
-    private int idMonnaie;*/
+
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name ="ID_MONNAIE")
@@ -77,5 +75,15 @@ public class PaysEntity {
             inverseJoinColumns = @JoinColumn(name = "ID_SANTE")
     )
     private List<SanteEntity> sante;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "Parler",
+            joinColumns = @JoinColumn(name = "ID_PAYS"),
+            inverseJoinColumns = @JoinColumn(name = "ID_LANGUES")
+    )
+    private List<LanguesEntity> langues;
 
 }

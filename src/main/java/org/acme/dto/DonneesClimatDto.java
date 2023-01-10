@@ -3,27 +3,19 @@ package org.acme.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.DonneesClimatEntity;
-import org.acme.entities.DonneesClimatEntityPK;
-import org.acme.entities.EvenementsEntity;
 import org.acme.hateaos.HateOas;
 
-import javax.persistence.*;
 
 @Data
 @JsonPropertyOrder({"idregion","mois","temperatureMin","temperatureMax","temperatureMoy","tauxHumidite"})
 public class DonneesClimatDto extends HateOas {
     private int idRegion;
-
     private int mois;
 
     private String libelleMois;
-
     private double temperatureMin;
-
     private double temperatureMax;
-
     private Double temperatureMoy;
-
     private int tauxHumidite;
 
     public DonneesClimatDto(DonneesClimatEntity donneesClimatEntity){

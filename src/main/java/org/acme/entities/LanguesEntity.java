@@ -3,6 +3,7 @@ package org.acme.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 @Data
 @Entity
@@ -16,4 +17,6 @@ public class LanguesEntity {
     @Column(name = "LIBELLE_LANGUES")
     private String libelleLangues;
 
+    @ManyToMany(mappedBy = "langues")
+    private List<PaysEntity> pays;
 }

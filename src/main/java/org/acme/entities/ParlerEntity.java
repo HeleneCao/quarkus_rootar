@@ -3,6 +3,7 @@ package org.acme.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,6 +18,7 @@ public class ParlerEntity {
     @Id
     @Column(name = "ID_LANGUES")
     private int idLangues;
+
 
 
 }

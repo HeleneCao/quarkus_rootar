@@ -23,6 +23,7 @@ public class SanteEntity {
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "ID_PRIORITE")
     private PrioriteEntity priorite;
+
     @ManyToMany(mappedBy = "sante")
     private List<PaysEntity> pays;
 
