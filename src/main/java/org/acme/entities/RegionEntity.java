@@ -25,4 +25,15 @@ public class RegionEntity {
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "ID_PAYS")
     private PaysEntity pays;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "appartenir",
+            joinColumns = @JoinColumn(name = "ID_REGION"),
+            inverseJoinColumns = @JoinColumn(name = "ID_THEME")
+    )
+    private List<ThemesEntity> themes;
+
 }

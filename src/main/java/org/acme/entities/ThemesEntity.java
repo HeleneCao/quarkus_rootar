@@ -20,4 +20,8 @@ public class ThemesEntity {
 
     @ManyToMany(mappedBy = "themes")
     private List<PaysEntity> pays;
+
+    @ManyToMany(mappedBy = "themes")
+    private List<RegionEntity> regions;
+
 }
