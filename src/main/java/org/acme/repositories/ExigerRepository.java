@@ -10,4 +10,5 @@ import javax.inject.Named;
 @ApplicationScoped
 @Named("ExigerRepository")
 public class ExigerRepository implements PanacheRepositoryBase<ExigerEntity, ExigerEntityPK> {
+
 }

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.*;
 import org.acme.hateaos.HateOas;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +41,8 @@ public class PaysDto extends HateOas {
 
     private Visas visas;
 
+    private List<Sante> sante;
+
 
 
     public PaysDto(PaysEntity paysEntity){
@@ -56,9 +61,18 @@ public class PaysDto extends HateOas {
         monnaie = fromMonnaieDtoList(paysEntity.getMonnaie());
         ville = new Ville(paysEntity.getVille());
         visas = new Visas(paysEntity.getVisas());
+        sante = fromSanteDtoList(paysEntity.getSante());
     }
-
-
+    public PaysDto(int id) {
+        this.id = id;
+    }
+    private List<Sante> fromSanteDtoList(List<SanteEntity> santeEntities) {
+        List<Sante> santeList = new ArrayList();
+        for (SanteEntity santeEntity : santeEntities){
+            santeList.add(new Sante(santeEntity));
+        }
+        return santeList;
+    }
     private List<Monnaie> fromMonnaieDtoList(List<MonnaieEntity> monnaieEntities) {
         List<Monnaie> monnaieList = new ArrayList();
         for (MonnaieEntity monnaieEntity : monnaieEntities){
@@ -76,10 +90,11 @@ public class PaysDto extends HateOas {
         return paysDtoList;
     }
 
-    public static PaysDto paysDtoById(PaysEntity paysEntities){
-        PaysDto paysDto = new PaysDto(paysEntities);
+    public static PaysDto paysDtoById(PaysEntity paysEntity){
+        PaysDto paysDto = new PaysDto(paysEntity);
         return paysDto;
     }
+
 
     @Data
     class Continent{
@@ -124,5 +139,15 @@ public class PaysDto extends HateOas {
             id = visasEntity.getIdVisas();
         }
     }
+    @Data
+    class Sante{
+        private int idSante;
 
+        private String libelleSante;
+        public Sante (SanteEntity santeEntity){
+            idSante=santeEntity.getIdSante();
+            libelleSante = santeEntity.getLibelleSante();
+        }
     }
+
+}

@@ -68,6 +68,14 @@ public class PaysEntity {
     @JoinColumn (name = "ID_CONTINENT")
     private ContinentEntity continent;
 
-
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "Exiger",
+            joinColumns = @JoinColumn(name = "ID_PAYS"),
+            inverseJoinColumns = @JoinColumn(name = "ID_SANTE")
+    )
+    private List<SanteEntity> sante;
 
 }

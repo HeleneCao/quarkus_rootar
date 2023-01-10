@@ -3,6 +3,7 @@ package org.acme.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,8 @@ public class SanteEntity {
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "ID_PRIORITE")
     private PrioriteEntity priorite;
+    @ManyToMany(mappedBy = "sante")
+    private List<PaysEntity> pays;
 
 
 

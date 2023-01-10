@@ -3,6 +3,7 @@ package org.acme.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.ObjetEntity;
+import org.acme.entities.PaysEntity;
 import org.acme.entities.PrioriteEntity;
 import org.acme.entities.SanteEntity;
 import org.acme.hateaos.HateOas;
@@ -30,6 +31,17 @@ public class SanteDto extends HateOas {
         public Priorite (PrioriteEntity priorite){
             idPriorite=priorite.getIdPriorite();
             libPriorite=priorite.getLibellePriorite();
+        }
+    }
+    @Data
+    @JsonPropertyOrder({"id","nom"})
+    class Pays extends HateOas{
+        private int id;
+        private String nom;
+
+        public Pays(PaysEntity paysEntity){
+            id= paysEntity.getIdPays();
+            nom = paysEntity.getNomPaysFr();
         }
     }
 

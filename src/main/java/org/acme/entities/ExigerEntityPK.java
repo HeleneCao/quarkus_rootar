@@ -13,6 +13,7 @@ public class ExigerEntityPK implements Serializable {
     @Column(name = "ID_PAYS")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int idPays;
     @Column(name = "ID_SANTE")
     @Id
