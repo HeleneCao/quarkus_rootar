@@ -65,6 +65,7 @@ public class ContinentResource {
     public long count() {
         return continentRepository.count();
     }
+
     @POST
     @Transactional
     public Response insert(ContinentEntity continent) {
@@ -75,27 +76,24 @@ public class ContinentResource {
         continentRepository.persist(continent);
         return Response.ok(continent).status(Response.Status.CREATED).build();
     }
-   /* @PUT
+
+    @PUT
     @Transactional
     @Path("{idContinent}")
     public Response update(@PathParam("idContinent") Integer idContinent, ContinentEntity continent){
         ContinentEntity continentEntity = continentRepository.findById(idContinent);
-       continentEntity.setNomContinentFr(continent.getNomContinentFr());
-       continentEntity.setNomContinentAng(continent.getNomContinentAng());
-
-
-
+        continentEntity.setNomContinentFr(continent.getNomContinentFr());
+        continentEntity.setNomContinentAng(continent.getNomContinentAng());
         return Response.ok(continent).build();
     }
+
     @DELETE
     @Path("/{idContinent}")
     @Transactional
     public Response delete(@PathParam("idContinent") Integer idContinent) {
-
         continentRepository.deleteById(idContinent);
         return Response.ok(idContinent).build();
 
-
-    }*/
+    }
 
 }

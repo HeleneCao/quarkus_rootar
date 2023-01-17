@@ -52,4 +52,6 @@ public class AeroportResource {
        AeroportDto aeroport = aeroportDtoById(aeroportRepository.findById(idAeroport));
         return Response.ok(aeroport).build();
     }
+
+
 }
