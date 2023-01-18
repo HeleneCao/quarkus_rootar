@@ -1,14 +1,11 @@
 package org.acme.endpoints;
 
-import org.acme.dto.ContinentDto;
 import org.acme.dto.PaysDto;
-import org.acme.entities.ContinentEntity;
 import org.acme.entities.PaysEntity;
 import org.acme.repositories.PaysRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -18,8 +15,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.acme.dto.ContinentDto.continentDtoById;
 import static org.acme.dto.PaysDto.paysDtoById;
 
 @Path("/pays")
@@ -30,7 +25,6 @@ public class PaysResource {
 
     @Inject
     PaysRepository paysRepository;
-
 
     @GET
     @Operation(summary = "Pays", description = "get all pays")
@@ -54,12 +48,7 @@ public class PaysResource {
         PaysDto pays = paysDtoById(paysRepository.findById(idPays));
         return Response.ok(pays).build();
     }
-    @GET
-    @Path("/count")
-    @Transactional
-    public long count() {
-        return paysRepository.count();
-    }
+
     @POST
     @Transactional
     public Response insert(PaysEntity pays) {
@@ -86,6 +75,12 @@ public class PaysResource {
 
         paysRepository.deleteById(idPays);
         return Response.ok(idPays).build();
+    }
 
+    @GET
+    @Path("/count")
+    @Transactional
+    public long count() {
+        return paysRepository.count();
     }
 }

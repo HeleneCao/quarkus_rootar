@@ -6,7 +6,6 @@ import lombok.Data;
 import org.acme.entities.PaysEntity;
 import org.acme.entities.ThemesEntity;
 import org.acme.hateaos.HateOas;
-
 import java.util.ArrayList;
 import java.util.List;
 

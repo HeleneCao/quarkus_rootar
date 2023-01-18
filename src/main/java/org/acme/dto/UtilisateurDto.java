@@ -3,7 +3,6 @@ package org.acme.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.UtilisateurEntity;
-import org.acme.entities.VilleEntity;
 import org.acme.hateaos.HateOas;
 @Data
 @JsonPropertyOrder({"login","mail", "role"})

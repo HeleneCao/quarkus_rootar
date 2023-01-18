@@ -1,17 +1,11 @@
 package org.acme.endpoints;
 
-import org.acme.dto.LanguesDto;
-import org.acme.dto.PaysDto;
 import org.acme.dto.PrioriteDto;
-import org.acme.entities.ContinentEntity;
-import org.acme.entities.LanguesEntity;
 import org.acme.entities.PrioriteEntity;
-import org.acme.repositories.ContinentRepository;
 import org.acme.repositories.PrioriteRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -21,8 +15,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.acme.dto.PaysDto.paysDtoById;
 import static org.acme.dto.PrioriteDto.prioriteDtoById;
 
 @Path("/priorite")

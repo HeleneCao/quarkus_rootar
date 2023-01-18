@@ -1,16 +1,13 @@
 package org.acme.endpoints;
 
 import org.acme.dto.AeroportDto;
-import org.acme.dto.CategoriesDto;
 import org.acme.entities.AeroportEntity;
-import org.acme.entities.CategoriesEntity;
 import org.acme.repositories.AeroportRepository;
-import org.acme.repositories.CategoriesRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -18,7 +15,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.acme.dto.AeroportDto.aeroportDtoById;
 
 
@@ -53,5 +49,33 @@ public class AeroportResource {
         return Response.ok(aeroport).build();
     }
 
+    @POST
+    @Transactional
+    public Response insert(AeroportEntity aeroport){
+        if (aeroport == null)
+            return  Response.status(Response.Status.BAD_REQUEST).build();
 
+        aeroportRepository.persist(aeroport);
+        return Response.ok(aeroport).status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Transactional
+    @Path("{idAeroport}")
+    public Response update(@PathParam("idAeroport") Integer idAeroport, AeroportEntity aeroport){
+        AeroportEntity aeroportEntity = aeroportRepository.findById(idAeroport);
+        aeroportEntity.setLibelleAeroport(aeroport.getLibelleAeroport());
+        aeroportEntity.setAdresse(aeroport.getAdresse());
+        aeroportEntity.setTelephone(aeroport.getTelephone());
+        aeroportEntity.setVille(aeroport.getVille());
+        return Response.ok(aeroport).build();
+    }
+
+    @DELETE
+    @Path("/{idAeroport}")
+    @Transactional
+    public Response delete(@PathParam("idAeroport") Integer idAeroport){
+        aeroportRepository.deleteById(idAeroport);
+        return Response.ok(idAeroport).build();
+    }
 }

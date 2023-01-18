@@ -2,14 +2,9 @@ package org.acme.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import org.acme.entities.ContinentEntity;
 import org.acme.entities.EvenementsEntity;
-import org.acme.entities.PaysEntity;
 import org.acme.entities.VilleEntity;
 import org.acme.hateaos.HateOas;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 

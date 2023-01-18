@@ -3,7 +3,6 @@ package org.acme.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.AeroportEntity;
-import org.acme.entities.CategoriesEntity;
 import org.acme.entities.VilleEntity;
 import org.acme.hateaos.HateOas;
 

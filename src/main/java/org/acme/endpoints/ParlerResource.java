@@ -1,7 +1,6 @@
 package org.acme.endpoints;
 
 import org.acme.dto.ParlerDto;
-import org.acme.entities.DonneesClimatEntityPK;
 import org.acme.entities.ParlerEntity;
 import org.acme.entities.ParlerEntityPK;
 import org.acme.repositories.ParlerRepository;
@@ -16,8 +15,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.acme.dto.DonneesClimatDto.dcDtoById;
 import static org.acme.dto.ParlerDto.parlerDtoById;
 
 @Path("/parler")

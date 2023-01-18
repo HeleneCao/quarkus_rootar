@@ -1,7 +1,6 @@
 package org.acme.endpoints;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
-
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;

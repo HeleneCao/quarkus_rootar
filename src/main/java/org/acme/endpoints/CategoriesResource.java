@@ -6,8 +6,8 @@ import org.acme.repositories.CategoriesRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -46,5 +46,32 @@ public class CategoriesResource {
     public Response getById(@PathParam("idCategories") Integer idCat){
         CategoriesDto categories = categoriesDtoById(categoriesRepository.findById(idCat));
         return Response.ok(categories).build();
+    }
+
+    @POST
+    @Transactional
+    public Response insert(CategoriesEntity categories){
+        if (categories == null)
+            return  Response.status(Response.Status.BAD_REQUEST).build();
+
+        categoriesRepository.persist(categories);
+        return Response.ok(categories).status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Transactional
+    @Path("{idCategorie}")
+    public Response update(@PathParam("idCategorie") Integer idCategorie, CategoriesEntity categories){
+        CategoriesEntity categoriesEntity = categoriesRepository.findById(idCategorie);
+        categoriesEntity.setLibelleCategories(categories.getLibelleCategories());
+        return Response.ok(categories).build();
+    }
+
+    @DELETE
+    @Path("/{idCategorie}")
+    @Transactional
+    public Response delete (@PathParam("idCategorie") Integer idCategorie){
+        categoriesRepository.deleteById(idCategorie);
+        return Response.ok(idCategorie).build();
     }
 }

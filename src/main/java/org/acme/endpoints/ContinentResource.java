@@ -1,24 +1,18 @@
 package org.acme.endpoints;
 
 import org.acme.dto.ContinentDto;
-import org.acme.dto.PaysDto;
 import org.acme.entities.ContinentEntity;
-import org.acme.entities.PaysEntity;
 import org.acme.repositories.ContinentRepository;
-import org.acme.repositories.PaysRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
-import javax.persistence.Column;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +26,6 @@ public class ContinentResource {
     @Inject
     ContinentRepository continentRepository;
 
-
-
     @GET
     @Operation(summary = "Continent", description = "get all continent")
     @APIResponse(responseCode = "200", description = "Ok, continent found")
@@ -46,11 +38,8 @@ public class ContinentResource {
             continentDto.addLinks("all", uriBase);
             continentDto.addLinks("self", uriBase +"/"+ continent.getIdContinent());
             continentsDto.add(continentDto);
-
-         
         }
         return Response.ok(continentsDto).build();
-
     }
 
     @GET
@@ -59,17 +48,10 @@ public class ContinentResource {
         ContinentDto continent = continentDtoById(continentRepository.findById(idContinent));
         return Response.ok(continent).build();
     }
-    @GET
-    @Path("/count")
-    @Transactional
-    public long count() {
-        return continentRepository.count();
-    }
 
     @POST
     @Transactional
     public Response insert(ContinentEntity continent) {
-
         if (continent == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
 
@@ -93,7 +75,13 @@ public class ContinentResource {
     public Response delete(@PathParam("idContinent") Integer idContinent) {
         continentRepository.deleteById(idContinent);
         return Response.ok(idContinent).build();
+    }
 
+    @GET
+    @Path("/count")
+    @Transactional
+    public long count() {
+        return continentRepository.count();
     }
 
 }

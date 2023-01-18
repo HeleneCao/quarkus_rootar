@@ -1,16 +1,15 @@
 package org.acme.endpoints;
 
 
-import org.acme.dto.SanteDto;
+
 import org.acme.dto.ThemesDto;
-import org.acme.entities.SanteEntity;
 import org.acme.entities.ThemesEntity;
 import org.acme.repositories.ThemesRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -18,8 +17,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.acme.dto.SanteDto.santeDtoById;
 import static org.acme.dto.ThemesDto.themesDtoById;
 
 @Path("/themes")
@@ -49,5 +46,32 @@ public class ThemesResource {
     public Response getById(@PathParam("idThemes") Integer idThemes){
         ThemesDto themes= themesDtoById(themesRepository.findById(idThemes));
         return Response.ok(themes).build();
+    }
+
+    @POST
+    @Transactional
+    public Response insert(ThemesEntity themes) {
+        if (themes == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        themesRepository.persist(themes);
+        return Response.ok(themes).status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Transactional
+    @Path("{idThemes}")
+    public Response update(@PathParam("idThemes") Integer idThemes, ThemesEntity themes){
+        ThemesEntity themesEntity = themesRepository.findById(idThemes);
+        themesEntity.setLibelleTheme(themes.getLibelleTheme());
+        return Response.ok(themes).build();
+    }
+
+    @DELETE
+    @Path("/{idThemes}")
+    @Transactional
+    public Response delete(@PathParam("idThemes") Integer idThemes) {
+        themesRepository.deleteById(idThemes);
+        return Response.ok(idThemes).build();
     }
 }

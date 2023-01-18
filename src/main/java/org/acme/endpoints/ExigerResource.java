@@ -1,20 +1,15 @@
 package org.acme.endpoints;
 
-import org.acme.dto.ExigerDto;
-import org.acme.entities.DonneesClimatEntityPK;
-import org.acme.entities.ExigerEntity;
+
 import org.acme.entities.ExigerEntityPK;
 import org.acme.repositories.ExigerRepository;
 import org.acme.repositories.PaysRepository;
 import org.acme.repositories.SanteRepository;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import static org.acme.dto.DonneesClimatDto.dcDtoById;
 import static org.acme.dto.ExigerDto.exigerDtoById;
 
 @Path("/exiger")

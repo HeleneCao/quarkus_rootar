@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.*;
 import org.acme.hateaos.HateOas;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 

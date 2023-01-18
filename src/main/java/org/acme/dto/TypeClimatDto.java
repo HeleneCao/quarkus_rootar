@@ -2,10 +2,8 @@ package org.acme.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-import org.acme.entities.CategoriesEntity;
 import org.acme.entities.TypeClimatEntity;
 import org.acme.hateaos.HateOas;
-
 import java.util.ArrayList;
 import java.util.List;
 

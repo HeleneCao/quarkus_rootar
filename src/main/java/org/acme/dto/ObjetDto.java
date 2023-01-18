@@ -4,23 +4,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import org.acme.entities.CategoriesEntity;
 import org.acme.entities.ObjetEntity;
-import org.acme.entities.PaysEntity;
 import org.acme.hateaos.HateOas;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @JsonPropertyOrder({"id","nom"})
 public class ObjetDto extends HateOas {
 
     private int idObjet;
-    private String libObjet;
+    private String libelleObjet;
 
     private Categories categories;
     public ObjetDto(ObjetEntity objetEntity){
         idObjet=objetEntity.getIdObjet();
-        libObjet=objetEntity.getLibelleObjet();
+        libelleObjet=objetEntity.getLibelleObjet();
         categories= new Categories(objetEntity.getCategories());
 
 
@@ -37,7 +33,7 @@ public class ObjetDto extends HateOas {
 
         public Categories(CategoriesEntity categoriesEntity){
             idCat=categoriesEntity.getIdCategories();
-            libObjet = categoriesEntity.getLibelleCategories();
+            libelleObjet = categoriesEntity.getLibelleCategories();
         }
 
     }

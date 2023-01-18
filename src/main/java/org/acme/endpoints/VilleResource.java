@@ -8,6 +8,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -15,8 +16,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.acme.dto.PaysDto.paysDtoById;
 import static org.acme.dto.VilleDto.villeDtoById;
 
 @Path("/Ville")
@@ -51,4 +50,31 @@ public class VilleResource {
         return Response.ok(ville).build();
     }
 
+    @POST
+    @Transactional
+    public Response insert(VilleEntity ville) {
+        if (ville == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        villeRepository.persist(ville);
+        return Response.ok(ville).status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Transactional
+    @Path("{idVille}")
+    public Response update(@PathParam("idVille") Integer idVille, VilleEntity ville){
+        VilleEntity villeEntity = villeRepository.findById(idVille);
+        villeEntity.setNomVille(ville.getNomVille());
+        villeEntity.setRegion(ville.getRegion());
+        return Response.ok(ville).build();
+    }
+
+    @DELETE
+    @Path("/{idVille}")
+    @Transactional
+    public Response delete(@PathParam("idVille") Integer idVille) {
+        villeRepository.deleteById(idVille);
+        return Response.ok(idVille).build();
+    }
 }

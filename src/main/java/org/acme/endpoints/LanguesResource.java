@@ -1,14 +1,13 @@
 package org.acme.endpoints;
 
-
 import org.acme.dto.LanguesDto;
 import org.acme.entities.LanguesEntity;
 import org.acme.repositories.LanguesRepositoiry;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -16,9 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.acme.dto.LanguesDto.languesDtoById;
-import static org.acme.dto.VisasDto.visasDtoById;
 
 @Path("/langues")
 @Tag(name="langues")
@@ -51,4 +48,32 @@ public class LanguesResource {
         LanguesDto langues = languesDtoById(languesRepositoiry.findById(idLangues));
         return Response.ok(langues).build();
     }
+
+    /*@POST
+    @Transactional
+    public Response insert(LanguesEntity langues){
+        if(langues == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        languesRepositoiry.persist(langues);
+        return Response.ok(langues).status(Response.Status.CREATED).build();
+    }*/
+
+    @PUT
+    @Transactional
+    @Path("{idLangue}")
+    public Response update(@PathParam("idLangue") Integer idLangue, LanguesEntity langues){
+        LanguesEntity languesEntity = languesRepositoiry.findById(idLangue);
+        languesEntity.setLibelleLangues(langues.getLibelleLangues());
+        return Response.ok(langues).build();
+    }
+
+    @DELETE
+    @Path("/{idLangue}")
+    @Transactional
+    public Response delete(@PathParam("idLangue") Integer idLangue){
+        languesRepositoiry.deleteById(idLangue);
+        return Response.ok(idLangue).build();
+    }
+
 }

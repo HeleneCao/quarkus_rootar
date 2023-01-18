@@ -7,6 +7,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -46,5 +47,33 @@ public class TypeVisasResource {
     public Response getById(@PathParam("idTypeVisas") Integer idTypeVisas){
         TypeVisasDto typeVisas = typeVisasDtoById(typeVisasRepository.findById(idTypeVisas));
         return Response.ok(typeVisas).build();
+    }
+
+    @POST
+    @Transactional
+    public Response insert(TypeVisaEntity typeVisa) {
+        if (typeVisa == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        typeVisasRepository.persist(typeVisa);
+        return Response.ok(typeVisa).status(Response.Status.CREATED).build();
+    }
+
+    @PUT
+    @Transactional
+    @Path("{idTypeVisas}")
+    public  Response update(@PathParam("idTypeVisas") Integer idTypeVisas, TypeVisaEntity typeVisa){
+        TypeVisaEntity typeVisaEntity = typeVisasRepository.findById(idTypeVisas);
+        typeVisaEntity.setLibelleTypeVisa(typeVisa.getLibelleTypeVisa());
+        return Response.ok(typeVisa).build();
+    }
+
+
+    @DELETE
+    @Path("/{idTypeVisas}")
+    @Transactional
+    public Response delete(@PathParam("idTypeVisas") Integer idTypeVisas) {
+        typeVisasRepository.deleteById(idTypeVisas);
+        return Response.ok(idTypeVisas).build();
     }
 }

@@ -6,18 +6,17 @@ import org.acme.entities.PaysEntity;
 import org.acme.entities.RegionEntity;
 import org.acme.entities.VilleEntity;
 import org.acme.hateaos.HateOas;
+
 @Data
 @JsonPropertyOrder({"id","nom", "region"})
 public class VilleDto extends HateOas {
 
     private int id;
     private String nom;
-    //private Region region;
 
     public VilleDto(VilleEntity villeEntity) {
         id = villeEntity.getIdVille();
         nom = villeEntity.getNomVille();
-        //region = new Region(villeEntity.getRegion());
     }
 
     public static VilleDto villeDtoById(VilleEntity villeEntities){

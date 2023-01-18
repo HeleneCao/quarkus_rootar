@@ -2,11 +2,9 @@ package org.acme.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
-
 import org.acme.entities.MonnaieEntity;
 import org.acme.entities.PaysEntity;
 import org.acme.hateaos.HateOas;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +22,10 @@ public class MonnaieDto extends HateOas {
         pays = fromPaysDtoList(monnaieEntity.getPays());
     }
 
+    public static MonnaieDto monnaieDtoById(MonnaieEntity monnaieEntities){
+        MonnaieDto monnaieDto = new MonnaieDto(monnaieEntities);
+        return monnaieDto;
+    }
     private List<Pays> fromPaysDtoList(List<PaysEntity> paysEntities) {
         List<Pays> paysList = new ArrayList();
         for (PaysEntity paysEntity : paysEntities){

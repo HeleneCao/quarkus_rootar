@@ -1,16 +1,13 @@
 package org.acme.endpoints;
 
-import org.acme.dto.ContinentDto;
+
 import org.acme.dto.DonneesClimatDto;
-import org.acme.dto.RepresentationEtrangereDto;
-import org.acme.entities.ContinentEntity;
 import org.acme.entities.DonneesClimatEntity;
 import org.acme.entities.DonneesClimatEntityPK;
 import org.acme.repositories.DonneesClimatRepository;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -19,9 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.acme.dto.DonneesClimatDto.dcDtoById;
-import static org.acme.dto.EvenementDto.evenementDtoById;
 
 @Path("/donneesClimat")
 @Tag(name="DonneesClimat")
